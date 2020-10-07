@@ -1,0 +1,6 @@
+FileVersion = 1
+Projects = {"Asteroids Tutor" = {Path = "."}, SDL2 = {Path = "C:/Program Files/BeefLang/BeefLibs/SDL2"}}
+Locked = ["SDL2"]
+
+[Workspace]
+StartupProject = "Asteroids Tutor"

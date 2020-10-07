@@ -1,0 +1,11 @@
+FileVersion = 1
+Dependencies = {corlib = "*", SDL2 = "*"}
+
+[Project]
+Name = "Asteroids Tutor"
+TargetType = "BeefGUIApplication"
+StartupObject = "AsteroidsTutor.Program"
+
+[Configs.Debug.Win64]
+TargetDirectory = "$(WorkspaceDir)/dist"
+TargetName = "$(ProjectName)_d"
