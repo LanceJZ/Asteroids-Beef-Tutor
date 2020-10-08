@@ -7,7 +7,9 @@ namespace AsteroidsTutor
 	static class Images
 	{
 		public static Image player;
+		public static Image playerFlame;
 		public static Image shot;
+		public static Image rockOne;
 
 		static List<Image> images = new .() ~ delete _;
 
@@ -35,6 +37,8 @@ namespace AsteroidsTutor
 		{
 			player = Try!(Load("images/PlayerShip.png"));
 			shot = Try!(Load("images/Shot.png"));
+			playerFlame = Try!(Load("images/PlayerFlame.png"));
+			rockOne = Try!(Load("images/RockOne.png"));
 
 			return .Ok;
 		}

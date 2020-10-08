@@ -1,11 +1,11 @@
 FileVersion = 1
 LastConfig = "Debug"
 LastPlatform = "Win64"
-RecentFilesList = ["src\\Shot.bf", "src\\Player.bf", "src\\Entity.bf", "src\\GameApp.bf", "src\\Timer.bf", "src\\Transform.bf", "src\\Images.bf", "src\\Sprite.bf"]
+RecentFilesList = ["src\\Entity.bf", "src\\Rock.bf", "src\\Transform.bf", "src\\GameApp.bf", "src\\Sprite.bf", "src\\Player.bf", "src\\RockManager.bf", "src\\Images.bf", "src\\Shot.bf", "src\\Timer.bf"]
 
 [MainWindow]
-X = 1346
-Y = 397
+X = 1320
+Y = 352
 Width = 1200
 Height = 1024
 ShowKind = "Normal"
@@ -42,19 +42,29 @@ DefaultDocumentsTabbedView = true
 Type = "TabbedView"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
-TabLabel = "Timer.bf"
-TabWidth = 87.0
-Type = "SourceViewPanel"
-FilePath = "src\\Timer.bf"
-CursorPos = 482
-ProjectName = "Asteroids Tutor"
-
-[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
 TabLabel = "GameApp.bf"
 TabWidth = 103.0
 Type = "SourceViewPanel"
 FilePath = "src\\GameApp.bf"
-CursorPos = 1125
+CursorPos = 553
+VertPos = 234.0
+ProjectName = "Asteroids Tutor"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "RockManager.bf"
+TabWidth = 125.0
+Type = "SourceViewPanel"
+FilePath = "src\\RockManager.bf"
+CursorPos = 269
+ProjectName = "Asteroids Tutor"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Rock.bf"
+TabWidth = 73.0
+Type = "SourceViewPanel"
+FilePath = "src\\Rock.bf"
+CursorPos = 539
+VertPos = 93.0
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
@@ -62,44 +72,7 @@ TabLabel = "Player.bf"
 TabWidth = 79.0
 Type = "SourceViewPanel"
 FilePath = "src\\Player.bf"
-CursorPos = 898
-VertPos = 540.0
-ProjectName = "Asteroids Tutor"
-
-[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
-Active = true
-TabLabel = "Shot.bf"
-TabWidth = 81.0
-Type = "SourceViewPanel"
-FilePath = "src\\Shot.bf"
-CursorPos = 576
-VertPos = 216.0
-ProjectName = "Asteroids Tutor"
-
-[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
-TabLabel = "Sprite.bf"
-TabWidth = 79.0
-Type = "SourceViewPanel"
-FilePath = "src\\Sprite.bf"
-CursorPos = 142
-ProjectName = "Asteroids Tutor"
-
-[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
-TabLabel = "Entity.bf"
-TabWidth = 76.0
-Type = "SourceViewPanel"
-FilePath = "src\\Entity.bf"
-CursorPos = 1462
-VertPos = 702.0
-ProjectName = "Asteroids Tutor"
-
-[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
-TabLabel = "Transform.bf"
-TabWidth = 104.0
-Type = "SourceViewPanel"
-FilePath = "src\\Transform.bf"
-CursorPos = 149
-VertPos = 54.0
+CursorPos = 174
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
@@ -107,8 +80,50 @@ TabLabel = "Images.bf"
 TabWidth = 87.0
 Type = "SourceViewPanel"
 FilePath = "src\\Images.bf"
-CursorPos = 659
-VertPos = 108.0
+CursorPos = 804
+ProjectName = "Asteroids Tutor"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Timer.bf"
+TabWidth = 77.0
+Type = "SourceViewPanel"
+FilePath = "src\\Timer.bf"
+CursorPos = 739
+ProjectName = "Asteroids Tutor"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Shot.bf"
+TabWidth = 71.0
+Type = "SourceViewPanel"
+FilePath = "src\\Shot.bf"
+CursorPos = 154
+ProjectName = "Asteroids Tutor"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Sprite.bf"
+TabWidth = 79.0
+Type = "SourceViewPanel"
+FilePath = "src\\Sprite.bf"
+CursorPos = 88
+ProjectName = "Asteroids Tutor"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+Active = true
+TabLabel = "Entity.bf"
+TabWidth = 76.0
+Type = "SourceViewPanel"
+FilePath = "src\\Entity.bf"
+CursorPos = 1275
+VertPos = 756.0
+ProjectName = "Asteroids Tutor"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Transform.bf"
+TabWidth = 104.0
+Type = "SourceViewPanel"
+FilePath = "src\\Transform.bf"
+CursorPos = 586
+VertPos = 54.0
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets]]
@@ -150,6 +165,11 @@ SizePriority = 1471.0
 Type = "TabbedView"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Find Results"
+TabWidth = 119.0
+Type = "FindResultsPanel"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
 TabLabel = "Threads"
 TabWidth = 97.0
 Type = "ThreadPanel"
@@ -169,13 +189,3 @@ Active = true
 TabLabel = "Output"
 TabWidth = 90.0
 Type = "OutputPanel"
-
-[[Breakpoints]]
-File = "src\\Player.bf"
-Line = 55
-Column = 6
-
-[[Breakpoints]]
-File = "src\\Shot.bf"
-Line = 44
-Column = 3

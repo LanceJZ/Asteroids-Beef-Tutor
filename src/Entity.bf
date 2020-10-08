@@ -6,6 +6,7 @@ namespace AsteroidsTutor
 	class Entity : Transform
 	{
 		public bool hit;
+		public const float TWO_PI = Math.PI_f * 2;
 
 		public this()
 		{
@@ -31,20 +32,6 @@ namespace AsteroidsTutor
 				(position.Y < -margin.Y) || (position.Y > gameInstance.mWidth + margin.Y));
 		}
 
-		public void WrapEdge()
-		{
-			if (position.X < 0)
-				position.X = gameInstance.mWidth;
-			else if (position.X > gameInstance.mWidth)
-				position.X = 0;
-
-			if (position.Y < 0)
-				position.Y = gameInstance.mHeight;
-
-			if (position.Y > gameInstance.mHeight)
-				position.Y = 0;
-		}
-
 		public bool CirclesIntercect(Entity target)
 		{
 			if (!enabled || !target.enabled)
@@ -61,18 +48,114 @@ namespace AsteroidsTutor
 			return false;
 		}
 
+		public void RandomVelocity(float magnitude)
+		{
+			velocity = (VelocityFromAngle(gameInstance.RandomMinMax(magnitude * 0.15f, magnitude),
+				gameInstance.RandomDegree()));
+		}
+
+        /// <summary>
+        /// Returns a Vector2 direction of travel from rotation and set magnitude.
+        /// </summary>
+        /// <param name="magnitude"></param>
+        /// <returns>Vector2</returns>
         public Vector2 VelocityFromAngle(float magnitude)
         {
-			float radRotation = rotation * Math.PI_f / 180;
+			float radRotation = DegreeToRadium(rotation);
             return Vector2(Math.Cos(radRotation) * magnitude, Math.Sin(radRotation) * magnitude);
         }
 
 		public Vector2 VelocityFromAngle(float magnitude, float rotation)
 		{
-			float radRotation = rotation * Math.PI_f / 180;
+			float radRotation = DegreeToRadium(rotation);
 		    return Vector2(Math.Cos(radRotation) * magnitude, Math.Sin(radRotation) * magnitude);
 		}
+		/// <summary>
+		/// Aims at target using the position.
+		/// Returns float for rotation velocity in degrees.
+		/// </summary>
+		/// <param name="target">Vector3</param>
+		/// <param name="magnitude">float</param>
+		/// <returns>float</returns>
+		public float PointAtTarget(Vector2 target, float magnitude)
+		{
+			float turnRotationVelocity = 0;
+			float rotationRadium = DegreeToRadium(rotation);
+			float targetAngleRadium = DegreeToRadium(AngleFromTargetPosition(target));
+			float targetLessFacing = targetAngleRadium - rotationRadium;
+			float facingLessTarget = rotationRadium - targetAngleRadium;
 
+			if (Math.Abs(targetLessFacing) > Math.PI_f)
+			{
+				if (rotationRadium > targetAngleRadium)
+				{
+					facingLessTarget = ((TWO_PI - rotationRadium) + targetAngleRadium) * -1;
+				}
+				else
+				{
+					facingLessTarget = (TWO_PI - targetAngleRadium) + rotationRadium;
+				}
+			}
+
+			if (facingLessTarget > 0)
+			{
+				turnRotationVelocity = -magnitude;
+			}
+			else
+			{
+				turnRotationVelocity = magnitude;
+			}
+
+			return RadiumToDegree(turnRotationVelocity);
+		}
+
+		public float AngleFromTargetPosition(Vector2 target)
+		{
+			return RadiumToDegree(Math.Atan2(target.Y - position.Y, target.X - position.X));
+		}
+
+		public float DegreeToRadium(float angle)
+		{
+			return angle * Math.PI_f / 180;
+		}
+
+		public float RadiumToDegree(float angle)
+		{
+			return angle * (180 / Math.PI_f);
+		}
+
+		public void WrapTopBottom()
+		{
+			if (position.Y > gameInstance.mHeight)
+			   position.Y = 0;
+
+			if (position.Y < 0)
+				position.Y = gameInstance.mHeight;
+		}
+
+		public bool WentOFFSideBorders()
+		{
+			if (position.X > gameInstance.mWidth || position.X < 0)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public void WrapEdge()
+		{
+			if (position.X < 0)
+				position.X = gameInstance.mWidth;
+			else if (position.X > gameInstance.mWidth)
+				position.X = 0;
+
+			if (position.Y < 0)
+				position.Y = gameInstance.mHeight;
+
+			if (position.Y > gameInstance.mHeight)
+				position.Y = 0;
+		}
         #region Spawn
         /// <summary>
         /// If position, rotation, rotation velocity and velocity are used.

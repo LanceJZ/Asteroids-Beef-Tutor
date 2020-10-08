@@ -6,6 +6,13 @@ Name = "Asteroids Tutor"
 TargetType = "BeefGUIApplication"
 StartupObject = "AsteroidsTutor.Program"
 
+[Platform.Windows]
+IconFile = "$(ProjectDir)\\src\\icon.ico"
+Description = "Asteroids Deluxe Clone using sprites."
+Comments = "A self tutor so I can learn Beef."
+Company = "Panther Games"
+Product = "Asteroids Deluxe"
+
 [Configs.Debug.Win64]
 TargetDirectory = "$(WorkspaceDir)/dist"
 TargetName = "$(ProjectName)_d"
