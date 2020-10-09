@@ -8,6 +8,8 @@ namespace AsteroidsTutor
 {
 	class Rock : Sprite
 	{
+		public GameApp.RockSize size;
+
 		public this ()
 		{
 			rotationVelocity = gameInstance.RandomMinMax(-30f, 30f);
@@ -19,7 +21,7 @@ namespace AsteroidsTutor
 
 		public void Initialize()
 		{
-			image = Images.rockOne;
+			TheImage = Images.rockOne;
 		}
 
 		public override void Update()
@@ -27,18 +29,24 @@ namespace AsteroidsTutor
 			base.Update();
 
 			WrapEdge();
+			CollisionCheck();
 		}
 
 		public override void Draw()
 		{
 			base.Draw();
-
 		}
 
-		public void Spawn()
+		void CollisionCheck()
 		{
-			Spawn(gameInstance.RandomSideEdge());
-			RandomVelocity(50);
+			for(Shot shot in gameInstance.player.shotsList)
+			{
+				if (CirclesIntercect(shot))
+				{
+					enabled = false;
+					shot.enabled = false;
+				}
+			}
 		}
 	}
 }

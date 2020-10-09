@@ -25,6 +25,19 @@ namespace AsteroidsTutor
 		bool fireButtonUp = true;
 		bool hyperButtonUp = true;
 
+		public enum RockSize
+		{
+		    Small,
+		    Medium,
+		    Large
+		};
+
+		public enum UFOType
+		{
+		    Small,
+		    Large
+		}
+
 		public this()
 		{
 			gameInstance = this;
@@ -127,10 +140,11 @@ namespace AsteroidsTutor
 			}
 		}
 
-		public void DrawString(SDL.Surface *surface, ref Vector2 position,
+		public void DrawString(Font font, String text, ref Vector2 position,
 			bool centerX = false, bool rightX = false)
 		{
-			//SDL.SetRenderDrawColor(mRenderer, 255, 255, 255, 255);
+			SDL.Surface *surface = SDLTTF.RenderUTF8_Blended(font.mFont, text,
+				 SDL.Color(255, 255, 255, 255));
 			SDL.Texture *texture = SDL.CreateTextureFromSurface(mRenderer, surface);
 			SDL.Rect srcRect = .(0, 0, surface.w, surface.h);
 
@@ -147,13 +161,15 @@ namespace AsteroidsTutor
 
 		public void UpdateScore(uint32 points)
 		{
-			//surface = SDLTTF.RenderUTF8_Blended(fontSmall.mFont, text, color);
-
 			String scoreString = scope String();
-			scoreString.AppendF("{}", points);
-			SDL.Surface *surface = SDLTTF.RenderUTF8_Blended(fontLarge.mFont, scoreString,
-				 SDL.Color(255, 255, 255, 255));
-			DrawString(surface, ref Vector2(300, 1), false, true);
+			NumberToString(points, scoreString);
+			DrawString(fontLarge, scoreString, ref Vector2(300, 1), false, true);
+		}
+
+		public void NumberToString(uint32 number, String string)
+		{
+			//String passed by reference, not a copy, so it changes it by reference.
+			string.AppendF("{}", number);
 		}
         /// <summary>
         /// Get a random int between min and max

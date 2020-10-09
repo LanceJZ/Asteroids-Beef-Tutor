@@ -19,11 +19,6 @@ namespace AsteroidsTutor
 		{
 		}
 
-		public void Initialize()
-		{
-			image = Images.shot;
-		}
-
 		public override void Update()
 		{
 			base.Update();
@@ -46,6 +41,5 @@ namespace AsteroidsTutor
 		    Spawn(position, velocity);
 		    life.Reset(timer);
 		}
-
 	}
 }

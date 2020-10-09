@@ -1,7 +1,7 @@
 FileVersion = 1
 LastConfig = "Debug"
 LastPlatform = "Win64"
-RecentFilesList = ["src\\Entity.bf", "src\\Rock.bf", "src\\Transform.bf", "src\\GameApp.bf", "src\\Sprite.bf", "src\\Player.bf", "src\\RockManager.bf", "src\\Images.bf", "src\\Shot.bf", "src\\Timer.bf"]
+RecentFilesList = ["src\\Entity.bf", "src\\Rock.bf", "src\\Player.bf", "src\\Sprite.bf", "src\\Shot.bf", "src\\Images.bf", "src\\Timer.bf", "src\\Transform.bf", "src\\GameApp.bf", "src\\RockManager.bf"]
 
 [MainWindow]
 X = 1320
@@ -46,8 +46,8 @@ TabLabel = "GameApp.bf"
 TabWidth = 103.0
 Type = "SourceViewPanel"
 FilePath = "src\\GameApp.bf"
-CursorPos = 553
-VertPos = 234.0
+CursorPos = 755
+VertPos = 1674.0
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
@@ -55,7 +55,8 @@ TabLabel = "RockManager.bf"
 TabWidth = 125.0
 Type = "SourceViewPanel"
 FilePath = "src\\RockManager.bf"
-CursorPos = 269
+CursorPos = 351
+VertPos = 1026.0
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
@@ -63,8 +64,8 @@ TabLabel = "Rock.bf"
 TabWidth = 73.0
 Type = "SourceViewPanel"
 FilePath = "src\\Rock.bf"
-CursorPos = 539
-VertPos = 93.0
+CursorPos = 444
+VertPos = 216.0
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
@@ -72,7 +73,8 @@ TabLabel = "Player.bf"
 TabWidth = 79.0
 Type = "SourceViewPanel"
 FilePath = "src\\Player.bf"
-CursorPos = 174
+CursorPos = 652
+VertPos = 972.0
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
@@ -96,7 +98,8 @@ TabLabel = "Shot.bf"
 TabWidth = 71.0
 Type = "SourceViewPanel"
 FilePath = "src\\Shot.bf"
-CursorPos = 154
+CursorPos = 233
+VertPos = 108.0
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
@@ -104,7 +107,8 @@ TabLabel = "Sprite.bf"
 TabWidth = 79.0
 Type = "SourceViewPanel"
 FilePath = "src\\Sprite.bf"
-CursorPos = 88
+CursorPos = 559
+VertPos = 216.0
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
@@ -113,8 +117,8 @@ TabLabel = "Entity.bf"
 TabWidth = 76.0
 Type = "SourceViewPanel"
 FilePath = "src\\Entity.bf"
-CursorPos = 1275
-VertPos = 756.0
+CursorPos = 761
+VertPos = 270.0
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
@@ -122,8 +126,8 @@ TabLabel = "Transform.bf"
 TabWidth = 104.0
 Type = "SourceViewPanel"
 FilePath = "src\\Transform.bf"
-CursorPos = 586
-VertPos = 54.0
+CursorPos = 352
+VertPos = 108.0
 ProjectName = "Asteroids Tutor"
 
 [[MainDockingFrame.DockedWidgets]]

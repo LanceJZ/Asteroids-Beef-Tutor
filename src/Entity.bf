@@ -38,12 +38,11 @@ namespace AsteroidsTutor
 				return false;
 
 			float distanceX = target.position.X - position.X;
-			float distanceY = target.position.Y = position.Y;
+			float distanceY = target.position.Y - position.Y;
 			float radius = this.radius + target.radius;
 
 			if((distanceX * distanceX) + (distanceY * distanceY) < radius * radius)
 				return true;
-
 
 			return false;
 		}

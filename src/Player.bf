@@ -25,13 +25,13 @@ namespace AsteroidsTutor
 
 		public void Initialize()
 		{
-			image = Images.player;
-			flame.image = Images.playerFlame;
+			TheImage = Images.player;
+			flame.TheImage = Images.playerFlame;
 
 			for (int i < 4)
 			{
 				shotsList.Add(new Shot());
-				shotsList.Back.Initialize();
+				shotsList.Back.TheImage = Images.shot;
 			}
 		}
 
@@ -65,13 +65,10 @@ namespace AsteroidsTutor
 				if (!shot.enabled)
 				{
 					shot.enabled = true;
-					Vector2 vfa = VelocityFromAngle(800);
-					shot.Spawn(position + VelocityFromAngle(30), vfa, 1.5f);
+					shot.Spawn(position + VelocityFromAngle(30), VelocityFromAngle(800), 1.5f);
 					break;
 				}
 			}
-
-			Debug.WriteLine("Fire");
 		}
 
 		public void Hyperspace()
