@@ -17,13 +17,40 @@ namespace AsteroidsTutor
 		public Random random = new Random() ~ delete _;
 		public List<Entity> entities = new List<Entity>() ~ DeleteContainerAndItems!(_);
 		public List<Timer> timers = new List<Timer>() ~ DeleteContainerAndItems!(_);
-		Font fontLarge ~ delete _;
-		Font fontSmall ~ delete _;
 		public Player player;
 		public RockManager rockManager ~ delete _;
+		public UFOManager ufoManager ~ delete _;
+		Font fontLarge ~ delete _;
+		Font fontSmall ~ delete _;
 		uint32 score;
+		int wave;
 		bool fireButtonUp = true;
 		bool hyperButtonUp = true;
+
+		public uint32 Score
+		{
+			get {return score;}
+			set mut {score = value;}
+		}
+
+		public int Wave
+		{
+			get {return wave;}
+		}
+
+		public int32 screenWidth
+		{
+			get {return mWidth;}
+
+			set mut {mWidth = value;}
+		}
+
+		public int32 screenHeight
+		{
+			get {return mHeight;}
+
+			set mut {mHeight = value;}
+		}
 
 		public enum RockSize
 		{
@@ -46,6 +73,7 @@ namespace AsteroidsTutor
 			mTitle.Replace("Beef Sample", "Asteroids Deluxe");
 			player = new Player();
 			rockManager = new RockManager();
+			ufoManager = new UFOManager();
 		}
 
 		public ~this()
@@ -54,7 +82,7 @@ namespace AsteroidsTutor
 			
 		}
 
-		public void Initilize()
+		public void Initialize()
 		{
 			base.Init();
 			Images.Load();
@@ -64,6 +92,7 @@ namespace AsteroidsTutor
 			fontSmall.Load("Hyperspace.ttf", 15);
 			player.Initialize();
 			rockManager.Initialize();
+			ufoManager.Initialize();
 			UpdateScore(100);
 		}
 
@@ -94,6 +123,7 @@ namespace AsteroidsTutor
 			}
 
 			rockManager.Update();
+			ufoManager.Update();
 		}
 
 		public override void Draw()
@@ -102,7 +132,8 @@ namespace AsteroidsTutor
 
 			for (Entity entity in entities)
 			{
-				entity.Draw();
+				if (entity.visable && entity.enabled)
+					entity.Draw();
 			}
 
 			UpdateScore(score);

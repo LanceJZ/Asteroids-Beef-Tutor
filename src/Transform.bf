@@ -15,15 +15,18 @@ namespace AsteroidsTutor
 		public float rotationVelocity;
 		public float rotationAcceleration;
 		public float radius;
-		public bool enabled;
 		double prevSec = elapsedSW.Elapsed.TotalSeconds;
 
-		public this()
+		public int32 X
 		{
+			get	{return (int32)position.X;}
+			set mut {position.X = value;}
 		}
 
-		public ~this()
+		public int32 Y
 		{
+			get{return (int32)position.Y;}
+			set mut {position.Y = value;}
 		}
 
 		public void UpdateElapsed()

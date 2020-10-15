@@ -10,12 +10,12 @@ namespace AsteroidsTutor
 	{
 		Timer life;
 
-		public this ()
+		public this() : base()
 		{
 			life = new Timer();
 		}
 
-		public ~this ()
+		public ~this()
 		{
 		}
 
@@ -34,6 +34,11 @@ namespace AsteroidsTutor
 		public override void Draw()
 		{
 			base.Draw();
+		}
+
+		public void Initialize()
+		{
+			TheImage = Images.shot;
 		}
 
 		public new void Spawn(Vector2 position, Vector2 velocity, float timer)

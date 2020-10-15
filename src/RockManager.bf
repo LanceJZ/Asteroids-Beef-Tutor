@@ -31,6 +31,48 @@ namespace AsteroidsTutor
 
 		}
 
+		public void RockDistroyed(Rock rockHit)
+		{
+			switch (rockHit.size)
+			{
+				case GameApp.RockSize.Large:
+					SpawnRocks(rockHit.position, GameApp.RockSize.Medium, 2);
+					break;
+				case GameApp.RockSize.Medium:
+					SpawnRocks(rockHit.position, GameApp.RockSize.Small, 2);
+					break;
+				case GameApp.RockSize.Small:
+					bool spawnWave = true;
+	
+					for (Rock rock in rocksList)
+					{
+						if (rock.enabled)
+						{
+							spawnWave = false;
+						}
+					}
+	
+					if (spawnWave)
+					{
+						NewWaveSpawn();
+					}
+					break;
+	
+				default:
+			}
+		}
+
+		public void Reset()
+		{
+			for (Rock rock in rocksList)
+			{
+				rock.enabled = false;
+			}
+
+			largeRockAmount = 2;
+			NewWaveSpawn();
+		}
+
 		void SpawnRocks(Vector2 position, GameApp.RockSize size, int count)
 		{
 			for (int numberOfRocks < count)
@@ -62,11 +104,13 @@ namespace AsteroidsTutor
 						GameApp.RockSize.Large);
 						break;
 					case GameApp.RockSize.Medium:
-						SpawnRock(rock, 0.5f, gameInstance.RandomSideEdge(), maxSpeed / 2,
+						SpawnRock(rock, 0.5f, position,
+						maxSpeed / 2,
 						GameApp.RockSize.Medium);
 						break;
 					case GameApp.RockSize.Small:
-						SpawnRock(rock, 0.5f, gameInstance.RandomSideEdge(), maxSpeed,
+						SpawnRock(rock, 0.25f, position,
+						maxSpeed,
 						GameApp.RockSize.Small);
 						break;
 
@@ -78,9 +122,10 @@ namespace AsteroidsTutor
 		void SpawnRock(int rock, float scale, Vector2 position, float speed, GameApp.RockSize size)
 		{
 			rocksList[rock].Initialize();
-			rocksList[rock].scale = scale;
+			rocksList[rock].Scale = scale;
 			rocksList[rock].size = size;
-			rocksList[rock].Spawn(position);
+			rocksList[rock].Spawn(position + Vector2(rocksList[rock].radius * scale,
+				 rocksList[rock].radius * scale));
 			rocksList[rock].rotationVelocity = gameInstance.RandomMinMax(-10, 10);
 			rocksList[rock].RandomVelocity(speed);
 		}

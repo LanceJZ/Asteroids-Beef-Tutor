@@ -10,6 +10,9 @@ namespace AsteroidsTutor
 		public static Image playerFlame;
 		public static Image shot;
 		public static Image rockOne;
+		public static Image UFO;
+		public static Image dot;
+		public static Image line;
 
 		static List<Image> images = new .() ~ delete _;
 
@@ -39,6 +42,9 @@ namespace AsteroidsTutor
 			shot = Try!(Load("images/Shot.png"));
 			playerFlame = Try!(Load("images/PlayerFlame.png"));
 			rockOne = Try!(Load("images/RockOne.png"));
+			UFO = Try!(Load("images/UFO.png"));
+			dot = Try!(Load("images/dot.png"));
+			line = Try!(Load("images/line.png"));
 
 			return .Ok;
 		}

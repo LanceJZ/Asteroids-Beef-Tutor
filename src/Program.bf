@@ -5,7 +5,7 @@ namespace AsteroidsTutor
 		public static void Main()
 		{
 			let gameApp = scope GameApp();
-			gameApp.Initilize();
+			gameApp.Initialize();
 			gameApp.Run();
 		}
 	}

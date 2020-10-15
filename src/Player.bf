@@ -12,7 +12,7 @@ namespace AsteroidsTutor
 		Timer flameTimer = new Timer(0.001666f);
 		public List<Shot> shotsList = new List<Shot>() ~ DeleteContainerAndItems!(_);
 
-		public this ()
+		public this () : base()
 		{
 			position.X = gameInstance.mWidth / 2;
 			position.Y = gameInstance.mHeight / 2;
@@ -31,7 +31,7 @@ namespace AsteroidsTutor
 			for (int i < 4)
 			{
 				shotsList.Add(new Shot());
-				shotsList.Back.TheImage = Images.shot;
+				shotsList.Back.Initialize();
 			}
 		}
 
@@ -65,7 +65,7 @@ namespace AsteroidsTutor
 				if (!shot.enabled)
 				{
 					shot.enabled = true;
-					shot.Spawn(position + VelocityFromAngle(30), VelocityFromAngle(800), 1.5f);
+					shot.Spawn(position + VelocityFromAngle(30), VelocityFromAngle(800), 1.25f);
 					break;
 				}
 			}

@@ -1,5 +1,6 @@
 using System;
 using Math;
+using SDL2;
 
 namespace AsteroidsTutor
 {
@@ -7,6 +8,11 @@ namespace AsteroidsTutor
 	{
 		public bool hit;
 		public const float TWO_PI = Math.PI_f * 2;
+		public float scale = 1;
+		public SDL.Rect boundingBox;
+		public Vector2 bbHalfSize;
+		public bool enabled;
+		public bool visable = true;
 
 		public this()
 		{
@@ -19,7 +25,11 @@ namespace AsteroidsTutor
 
 		public override void Update()
 		{
-			base.Update();
+			if (enabled)
+				base.Update();
+
+			boundingBox.x = X - (int32)(bbHalfSize.X * scale);
+			boundingBox.y = Y - (int32)(bbHalfSize.Y * scale);
 		}
 
 		public virtual void Draw()
@@ -28,8 +38,8 @@ namespace AsteroidsTutor
 
 		public bool IsOffScreen(Vector2 margin)
 		{
-			return ((position.X < -margin.X) || (position.X > gameInstance.mWidth + margin.X) ||
-				(position.Y < -margin.Y) || (position.Y > gameInstance.mWidth + margin.Y));
+			return ((X < -margin.X) || (X > gameInstance.mWidth + margin.X) ||
+				(Y < -margin.Y) || (Y > gameInstance.mWidth + margin.Y));
 		}
 
 		public bool CirclesIntercect(Entity target)
@@ -37,11 +47,11 @@ namespace AsteroidsTutor
 			if (!enabled || !target.enabled)
 				return false;
 
-			float distanceX = target.position.X - position.X;
-			float distanceY = target.position.Y - position.Y;
-			float radius = this.radius + target.radius;
+			float distanceX = target.position.X - X;
+			float distanceY = target.position.Y - Y;
+			float totalRadius = (radius * scale) + (target.radius * target.scale);
 
-			if((distanceX * distanceX) + (distanceY * distanceY) < radius * radius)
+			if((distanceX * distanceX) + (distanceY * distanceY) < totalRadius * totalRadius)
 				return true;
 
 			return false;
@@ -108,9 +118,14 @@ namespace AsteroidsTutor
 			return RadiumToDegree(turnRotationVelocity);
 		}
 
+		public float AngleFromTargetPosition(Entity target)
+		{
+			return AngleFromTargetPosition(target.position);
+		}
+
 		public float AngleFromTargetPosition(Vector2 target)
 		{
-			return RadiumToDegree(Math.Atan2(target.Y - position.Y, target.X - position.X));
+			return RadiumToDegree(Math.Atan2(target.Y - Y, target.X - X));
 		}
 
 		public float DegreeToRadium(float angle)
@@ -125,16 +140,16 @@ namespace AsteroidsTutor
 
 		public void WrapTopBottom()
 		{
-			if (position.Y > gameInstance.mHeight)
-			   position.Y = 0;
+			if (Y > gameInstance.mHeight)
+			   Y = 0;
 
-			if (position.Y < 0)
-				position.Y = gameInstance.mHeight;
+			if (Y < 0)
+				Y = gameInstance.mHeight;
 		}
 
 		public bool WentOFFSideBorders()
 		{
-			if (position.X > gameInstance.mWidth || position.X < 0)
+			if (X > gameInstance.mWidth || X < 0)
 			{
 				return true;
 			}
@@ -144,16 +159,16 @@ namespace AsteroidsTutor
 
 		public void WrapEdge()
 		{
-			if (position.X < 0)
-				position.X = gameInstance.mWidth;
-			else if (position.X > gameInstance.mWidth)
-				position.X = 0;
+			if (X < 0)
+				X = gameInstance.mWidth;
+			else if (X > gameInstance.mWidth)
+				X = 0;
 
-			if (position.Y < 0)
-				position.Y = gameInstance.mHeight;
+			if (Y < 0)
+				Y = gameInstance.mHeight;
 
-			if (position.Y > gameInstance.mHeight)
-				position.Y = 0;
+			if (Y > gameInstance.mHeight)
+				Y = 0;
 		}
         #region Spawn
         /// <summary>
