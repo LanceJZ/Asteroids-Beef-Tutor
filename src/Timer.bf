@@ -54,7 +54,7 @@ namespace AsteroidsTutor
 
 		public void Update()
 		{
-			seconds += (float)lifeSW.Elapsed.TotalSeconds * 0.0025f;
+			seconds = (float)lifeSW.Elapsed.TotalSeconds;
 
 			if (Elapsed)
 			{
@@ -64,7 +64,7 @@ namespace AsteroidsTutor
 
 		public void Reset()
 		{
-			lifeSW.Reset();
+			lifeSW.Restart();
 			lifeSW.Start();
 			enabled = true;
 			seconds = 0;

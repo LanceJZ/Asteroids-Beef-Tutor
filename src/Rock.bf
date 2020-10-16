@@ -43,26 +43,36 @@ namespace AsteroidsTutor
 			{
 				if (boundingBox.Contains(shot.X, shot.Y) && shot.enabled)
 				{
-					enabled = false;
 					shot.enabled = false;
 					PlayerScored();
-					gameInstance.rockManager.RockDistroyed(this);
+					Hit();
 				}
 			}
 
-			if (CirclesIntercect(gameInstance.player) && gameInstance.player.enabled)
+			if (CirclesIntercect(gameInstance.player))
 			{
-				enabled = false;
 				PlayerScored();
-				gameInstance.rockManager.RockDistroyed(this);
+				Hit();
 			}
 
-			if (CirclesIntercect(gameInstance.ufoManager.theUFO) && gameInstance.ufoManager.theUFO.enabled)
+			if (CirclesIntercect(gameInstance.ufoManager.theUFO))
 			{
 				gameInstance.ufoManager.theUFO.Reset();
-				enabled = false;
-				gameInstance.rockManager.RockDistroyed(this);
+				Hit();
 			}
+
+			if (boundingBox.Contains(gameInstance.ufoManager.theUFO.shot.X,
+				 gameInstance.ufoManager.theUFO.shot.Y) && gameInstance.ufoManager.theUFO.shot.enabled)
+			{
+				gameInstance.ufoManager.theUFO.shot.enabled = false;
+				Hit();
+			}
+		}
+
+		void Hit()
+		{
+			enabled = false;
+			gameInstance.rockManager.RockDistroyed(this);
 		}
 
         void PlayerScored()

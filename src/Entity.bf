@@ -59,8 +59,8 @@ namespace AsteroidsTutor
 
 		public void RandomVelocity(float magnitude)
 		{
-			velocity = (VelocityFromAngle(gameInstance.RandomMinMax(magnitude * 0.15f, magnitude),
-				gameInstance.RandomDegree()));
+			velocity = (VelocityFromAngle(gameInstance.RandomDegree(),
+				gameInstance.RandomMinMax(magnitude * 0.15f, magnitude)));
 		}
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace AsteroidsTutor
             return Vector2(Math.Cos(radRotation) * magnitude, Math.Sin(radRotation) * magnitude);
         }
 
-		public Vector2 VelocityFromAngle(float magnitude, float rotation)
+		public Vector2 VelocityFromAngle(float rotation, float magnitude)
 		{
 			float radRotation = DegreeToRadium(rotation);
 		    return Vector2(Math.Cos(radRotation) * magnitude, Math.Sin(radRotation) * magnitude);

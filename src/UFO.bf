@@ -13,7 +13,7 @@ namespace AsteroidsTutor
 		Timer fireTimer;
 		Timer vectorTimer;
 		float speed = 0;
-		float shotSpeed = 16.666f;
+		float shotSpeed = 466.666f;
 
 		public this ()
 		{
@@ -29,6 +29,7 @@ namespace AsteroidsTutor
 		public void Initialize()
 		{
 			TheImage = Images.UFO;
+			shot.Initialize();
 		}
 
 		public override void Update()
@@ -41,6 +42,9 @@ namespace AsteroidsTutor
 
 			if (vectorTimer.Elapsed)
 				ChangeVector();
+
+			if (fireTimer.Elapsed)
+				Fire();
 		}
 
 		public override void Draw()
@@ -102,7 +106,7 @@ namespace AsteroidsTutor
 				}
 			}
 
-			if (CirclesIntercect(gameInstance.player) && gameInstance.player.enabled)
+			if (CirclesIntercect(gameInstance.player))
 			{
 				enabled = false;
 				PlayerScored();
@@ -136,11 +140,29 @@ namespace AsteroidsTutor
 		void Fire()
 		{
 			fireTimer.Reset();
+
+			float angle = 0;
+
+			switch (type)
+			{
+				case GameApp.UFOType.Large:
+					angle = gameInstance.RandomDegree();
+					break;
+				case GameApp.UFOType.Small:
+					angle = AimedFire();
+					break;
+			}
+
+			if (!shot.enabled)
+			{
+				shot.Spawn(position + VelocityFromAngle(angle, radius / 2), VelocityFromAngle(angle, shotSpeed),
+					1.25f);
+			}
 		}
 
 		float AimedFire()
 		{
-			float percentChance = 0.25f - (gameInstance.Score * 0.00001f);
+			float percentChance = 7.25f - (gameInstance.Score * 0.00001f);
 
 			if (percentChance < 0)
 			{
