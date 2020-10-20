@@ -99,18 +99,22 @@ namespace AsteroidsTutor
 			{
 				if (boundingBox.Contains(shot.X, shot.Y) && shot.enabled)
 				{
-					enabled = false;
+					Hit();
 					shot.enabled = false;
-					gameInstance.ufoManager.ResetTimer();
-					PlayerScored();
 				}
 			}
 
 			if (CirclesIntercect(gameInstance.player))
 			{
-				enabled = false;
-				PlayerScored();
+				Hit();
 			}
+		}
+
+		void Hit()
+		{
+			gameInstance.ufoManager.ResetTimer();
+			PlayerScored();
+			enabled = false;
 		}
 
 		void ChangeVector()

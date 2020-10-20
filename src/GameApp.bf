@@ -7,6 +7,12 @@ using Math;
 
 namespace AsteroidsTutor
 {
+	public struct HighScore
+	{
+	    public uint32 score;
+	    public String name;
+	}
+	
 	static
 	{
 		public static GameApp gameInstance;
@@ -14,6 +20,29 @@ namespace AsteroidsTutor
 
 	class GameApp : SDLApp
 	{
+		public enum GameState
+		{
+		    PlayerHit,
+		    Over,
+		    InPlay,
+		    Pause,
+		    HighScore,
+		    MainMenu
+		}
+		
+		public enum RockSize
+		{
+		    Small,
+		    Medium,
+		    Large
+		}
+		
+		public enum UFOType
+		{
+		    Small,
+		    Large
+		}
+		
 		public Random random = new Random() ~ delete _;
 		public List<Entity> entities = new List<Entity>() ~ DeleteContainerAndItems!(_);
 		public List<Timer> timers = new List<Timer>() ~ DeleteContainerAndItems!(_);
@@ -23,54 +52,32 @@ namespace AsteroidsTutor
 		Font fontLarge ~ delete _;
 		Font fontSmall ~ delete _;
 		uint32 score;
+		uint32 highScore;
+		GameState gameMode = GameState.Over;
 		int wave;
+		int lives;
 		bool fireButtonUp = true;
 		bool hyperButtonUp = true;
 
-		public uint32 Score
-		{
-			get {return score;}
-			set mut {score = value;}
-		}
+        public GameState CurrentMode { get => gameMode; set mut => gameMode = value; }
 
-		public int Wave
-		{
-			get {return wave;}
-		}
+		public uint32 Score { get => score; set mut => score = value; }
 
-		public int32 screenWidth
-		{
-			get {return mWidth;}
+		public int Wave { get => wave; }
 
-			set mut {mWidth = value;}
-		}
+		public int32 screenWidth { get => mWidth; set mut => mWidth = value; }
 
-		public int32 screenHeight
-		{
-			get {return mHeight;}
-
-			set mut {mHeight = value;}
-		}
-
-		public enum RockSize
-		{
-		    Small,
-		    Medium,
-		    Large
-		};
-
-		public enum UFOType
-		{
-		    Small,
-		    Large
-		}
+		public int32 screenHeight { get => mHeight; set mut => mHeight = value; }
 
 		public this()
 		{
 			gameInstance = this;
 			mWidth = 1280;
 			mHeight = 960;
-			mTitle.Replace("Beef Sample", "Asteroids Deluxe");
+
+			mTitle.Clear();
+			mTitle.Append("Asteroids Deluxe");
+
 			player = new Player();
 			rockManager = new RockManager();
 			ufoManager = new UFOManager();
@@ -79,7 +86,6 @@ namespace AsteroidsTutor
 		public ~this()
 		{
 			Images.Dispose();
-			
 		}
 
 		public void Initialize()
@@ -93,7 +99,6 @@ namespace AsteroidsTutor
 			player.Initialize();
 			rockManager.Initialize();
 			ufoManager.Initialize();
-			UpdateScore(100);
 		}
 
 		public override void Update()
@@ -106,7 +111,21 @@ namespace AsteroidsTutor
 				Environment.Exit(0);
 			}
 
-			HandleInputs();
+			if (gameMode == GameState.Over && IsKeyDown(SDL.Scancode.Return))
+			{
+				NewGame();
+			}
+
+			switch(gameMode)
+			{
+				case GameState.InPlay:
+					HandleInputs();
+					break;
+				case GameState.PlayerHit:
+					CheckPlayerClear();
+					break;
+				default:
+			}
 
 			for (Entity entity in entities)
 			{
@@ -194,6 +213,12 @@ namespace AsteroidsTutor
 		{
 			String scoreString = scope String();
 			NumberToString(points, scoreString);
+
+			if (points == 0)
+			{
+				scoreString = "00";
+			}
+
 			DrawString(fontLarge, scoreString, ref Vector2(300, 1), false, true);
 		}
 
@@ -231,6 +256,57 @@ namespace AsteroidsTutor
 		public float RandomDegree()
 		{
 			return RandomMinMax(0f, 360f);
+		}
+
+		public void PlayerHit()
+		{
+		    player.Hit();
+		    lives--;
+
+		    if (lives < 0)
+		    {
+		        gameMode = GameState.Over;
+
+		        if (score > highScore)
+		        {
+		            highScore = score;
+		            //HighScoreChanged();
+		            //SaveHighScore();
+		        }
+
+		        //CheckForNewHighScore();
+
+		        return;
+		    }
+
+		    //PlayerShipDesplay();
+		    gameMode = GameState.PlayerHit;
+		}
+
+		void NewGame()
+		{
+			lives = 4;
+			score = 0;
+			player.Spawn();
+			ufoManager.Reset();
+			rockManager.Reset();
+		}
+
+		void CheckPlayerClear()
+		{
+			Entity clearCircle = new Entity();
+			clearCircle.radius = screenHeight * 0.125f;
+			clearCircle.enabled = true;
+			ufoManager.Reset();
+
+			for (Rock rock in rockManager.rocksList)
+			{
+				if (clearCircle.CirclesIntercect(rock))
+				{
+					gameMode = GameState.InPlay;
+					player.Spawn();
+				}
+			}
 		}
 
 		void HandleInputs()

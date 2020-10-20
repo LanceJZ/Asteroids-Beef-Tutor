@@ -11,12 +11,13 @@ namespace AsteroidsTutor
 		Sprite flame = new Sprite();
 		Timer flameTimer = new Timer(0.001666f);
 		public List<Shot> shotsList = new List<Shot>() ~ DeleteContainerAndItems!(_);
+		public bool doneExploding;
 
 		public this () : base()
 		{
 			position.X = gameInstance.mWidth / 2;
 			position.Y = gameInstance.mHeight / 2;
-			enabled = true;
+			//enabled = true;
 		}
 
 		public ~this ()
@@ -56,6 +57,16 @@ namespace AsteroidsTutor
 		public override void Draw()
 		{
 			base.Draw();
+		}
+
+		public void Hit()
+		{
+			enabled = false;
+		}
+
+		public void Spawn()
+		{
+			base.Spawn(Vector2(gameInstance.screenWidth / 2, gameInstance.screenHeight / 2));
 		}
 
 		public void Fire()

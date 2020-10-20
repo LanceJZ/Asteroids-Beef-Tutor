@@ -52,12 +52,13 @@ namespace AsteroidsTutor
 			if (CirclesIntercect(gameInstance.player))
 			{
 				PlayerScored();
+				gameInstance.PlayerHit();
 				Hit();
 			}
 
 			if (CirclesIntercect(gameInstance.ufoManager.theUFO))
 			{
-				gameInstance.ufoManager.theUFO.Reset();
+				gameInstance.ufoManager.Reset();
 				Hit();
 			}
 
